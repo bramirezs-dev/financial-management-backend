@@ -8,6 +8,7 @@ import configs from '@configs';
 
 
 const config = configs(env.NODE_ENV || 'dev');
+console.log('este es el enviroment',env.NODE_ENV)
 const { port } = config();
 
 async function bootstrap() {
