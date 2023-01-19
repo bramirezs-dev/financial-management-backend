@@ -1,8 +1,18 @@
+require('module-alias/register');
+import { env} from 'process';
 import { NestFactory } from '@nestjs/core';
+import { ConfigService } from '@nestjs/config';
 import { AppModule } from './app.module';
+import configs from '@configs';
+
+
+
+const config = configs(env.NODE_ENV || 'dev');
+const { port } = config();
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  await app.listen(3000);
+  const configService: ConfigService = app.get(ConfigService);
+  await app.listen(port);
 }
 bootstrap();
